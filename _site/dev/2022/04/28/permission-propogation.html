@@ -1,0 +1,231 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>How do I handle Permission Propogation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.2/dist/flowbite.min.css" />
+    <script src="https://unpkg.com/flowbite@1.4.2/dist/flowbite.js"></script>
+
+  </head>
+  <body>
+    <nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 dark:bg-gray-800">
+  <div class="container flex flex-wrap justify-between items-center mx-auto">
+      <a href="/" class="flex items-center">
+          <span class="self-center text-xl font-semibold whitespace-nowrap dark:text-white">Leonard Melnik</span>
+      </a>
+      <button data-collapse-toggle="mobile-menu" type="button" class="inline-flex items-center p-2 ml-3 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600" aria-controls="mobile-menu" aria-expanded="false">
+<span class="sr-only">Open main menu</span>
+<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd"></path></svg>
+<svg class="hidden w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+</button>
+      <div class="hidden w-full md:block md:w-auto" id="mobile-menu">
+          <ul class="flex flex-col mt-4 md:flex-row md:space-x-8 md:mt-0 md:text-sm md:font-medium">
+              <li>
+                  <a href="/" class="block py-2 pr-4 pl-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white" aria-current="page">Home</a>
+              </li>
+              <li>
+                  <a href="/vintage" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Vintage</a>
+              </li>
+              <li>
+                  <a href="/personal" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Personal</a>
+              </li>
+              <li>
+                <a href="/dev" class="block py-2 pr-4 pl-3 text-gray-700 border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-gray-400 md:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Development</a>
+            </li>
+
+          </ul>
+      </div>
+  </div>
+</nav>   
+    <script src="https://cdn.tailwindcss.com"></script>
+
+<div class="container mx-auto font-mono">
+    <br />
+    <h1 class="text-5xl">How do I handle Permission Propogation</h1>
+    <br/>
+
+
+    <p><br /></p>
+
+<p class="text-3xl"> How to handle permissions for entities that can be recursively owned by each other.</p>
+<p><br /></p>
+
+<p>I started working on a personal project called <a href="https://isitall.online">isitall.online</a>
+<br /></p>
+
+<p>To sum it up, it is an uptime monitoring software. You have anything (I call an “entity”). And it tells you its status, is it up, its it down. The entity, is simply a represenation, and it can represent anything. A website, a person, a building, a program, heck even a stock.
+<br />
+<br /></p>
+
+<p>IsItAll.Online knows the status of each entity via two methods.</p>
+
+<ul class="list-decimal indent-8">
+
+    <li>If the Entity represents a website or an API, IIAO can just check if its online. This is when IIAO reaches out</li>
+    <li>The other method, is the item that the entity reprents reaches out and indicates its status. This will be the main one used, since it allows for anything to communicate with IsItAll.Online</li>
+
+</ul>
+
+<p><br /></p>
+
+<p>As I was planning the software, I came upon a relization. How will I organize things? I don’t want to do it via tags. But instead maybe a folder like structure?</p>
+
+<p><br /></p>
+
+<p>This is essential for me. And let me explain why.</p>
+
+<hr />
+<p><img src="/assets/permprog/1.png" width="200px" height="auto" /></p>
+
+<p><br />
+I can see the status of this entity, which represents a company. However then I want to go deeper. I would like to see an entity for each of the sub-parts. Which would be</p>
+
+<p><img src="/assets/permprog/2.png" width="400px" height="auto" /></p>
+
+<p><br /></p>
+
+<p>But even that is not enough detail to solve a potential outage. We need more</p>
+
+<p><br /></p>
+
+<p><img src="/assets/permprog/3.png" width="400px" height="auto" /></p>
+
+<p><br /></p>
+
+<p>This can go on forever. But how do we actually organize this in the database?</p>
+
+<p><br /></p>
+
+<p>As far as I am aware, there is no magic program that does this for you.
+We have to link each entity ourselves. And there are many methods to do so
+<br /></p>
+
+<p>Keep in min</p>
+
+<p><br />
+Lets start with what an entity looks like in the database
+<img src="/assets/permprog/4.png" width="300px" height="auto" /></p>
+
+<div class="border-2 curved bg-blue-300">
+Permissions propagation is the process whereby permissions from a higher level node in a folder tree are copied to a child node further down in that same folder tree.
+</div>
+<p>Since we can see that an entity can have children. And those children can have children. We need to devise a method of “permission propogation”</p>
+
+<p><a class="text-3xl">One option is to store a full list. Like a directory list in each entity</a>
+<br />
+<br /></p>
+
+<p>Since “Evaluable” is the first entity (no entity “owns” it). It will have a list value of “/”</p>
+<div class="columns-2 border-dashed border-2 border-blue-300">
+<img src="/assets/permprog/1.png" width="200px" height="auto" />
+
+<img src="/assets/permprog/6.png" width="200px" height="auto" />
+
+</div>
+<p><br />
+Moving down another level, the entities “Backend” and “Frontend” are children of “Evaluable. So their “List” is “/21xe1” (21xe1 is the ID of Evaluable)</p>
+
+<div class="columns-2 border-dashed border-2 border-blue-300">
+<img src="/assets/permprog/2.png" width="400px" height="auto" />
+
+<img src="/assets/permprog/7.png" width="400px" height="auto" />
+
+</div>
+<p><br /></p>
+
+<p>Now we just continue the format.
+<br /></p>
+<div class="columns-2 border-dashed border-2 border-blue-300">
+<img src="/assets/permprog/3.png" width="400px" height="auto" />
+
+<img src="/assets/permprog/5.png" width="400px" height="auto" />
+</div>
+<p><br />
+<br />
+<br />
+<br />
+<br />
+<br /></p>
+
+<p>I don’t know the proper terms for these but I was unable to find a solution.</p>
+
+<p>All I could find was</p>
+
+<p>“You will query 1000x more asking if someone has permission over something rather than changing permission”</p>
+
+<p>So optimize for changing permission instead of</p>
+
+<ol>
+  <li>Search backwards.</li>
+</ol>
+
+<p>If someone comes up to you and says you are their 10th generation decendent. How do you trust them?</p>
+
+<p>And this is also in a situation where people only know who their parents are.</p>
+
+<p>Well one option would be to ask your parents who their parents are, then ask your parents parents who their parents are.</p>
+
+<p>And keep going until you find IF YOU EVEN DO the person who came up to you.</p>
+
+<p>The problem with this is that as generation increases, to find if you are related (or in our case have permission) will exponentally grow.</p>
+
+<p>This option in my opinion requires the most power. But utilizes the least storage</p>
+
+<ol>
+  <li></li>
+</ol>
+
+<p>Store all that came before.</p>
+
+<p>In this case. An entity will store every entity that came before it. And if a user “Owns” or has permission over any one of those entities. Then they may have permission for this one.</p>
+
+<p>This gives us very limited options in terms of managing</p>
+
+<ol>
+  <li>Lookup table
+    <ul>
+      <li>Everything is stored only once.</li>
+      <li>Can allocate permisssions better.</li>
+      <li>Can remove permissions better</li>
+      <li>Specific to users. NOT entities</li>
+    </ul>
+  </li>
+</ol>
+
+<p>still a problem because we have to generate the path of the entity that we are checking against</p>
+
+<p>Has teams and users. First check if a user belongs</p>
+
+<ol>
+  <li>The good method.</li>
+</ol>
+
+<ul>
+  <li>
+    <p>Establish teams. Users can belong to teams</p>
+  </li>
+  <li>Teams have members. But there are two types of members
+    <ul>
+      <li>One of which is part of the team</li>
+      <li>The other is ABOVE. Aka creator</li>
+    </ul>
+  </li>
+  <li>
+    <p>Start with one user who creates one entity. They can choose to add a team to have permission for that.</p>
+
+    <ol>
+      <li>Establish role-based access control, so your Finance team has one group and the same set of permissions they need for their job.</li>
+      <li>Empower data owners to consistently manage their group members and folder permissions.</li>
+      <li>Enable natural inheritance from role-based, least privileged folders. For example, set up a Finance folder, grant the Finance group access, and allow inheritance to sub-folders in the Finance tree. This way, the Finance team can organize their data into different folders, and the data owners manage the permissions. The Finance data stays in the purview of the Finance team, which limits exposure to data theft from insiders and outside attackers.</li>
+      <li>Disable inheritance from the root node of the drive to protect the role-based folders. Aka, only if entity is owend by another entity does it inherit its permissions</li>
+    </ol>
+  </li>
+</ul>
+
+
+</div>
+
+  </body>
+</html>

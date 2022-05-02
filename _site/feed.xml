@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="4.2.2">Jekyll</generator><link href="http://0.0.0.0:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://0.0.0.0:4000/" rel="alternate" type="text/html" /><updated>2022-05-02T11:42:24-07:00</updated><id>http://0.0.0.0:4000/feed.xml</id><title type="html">Leonard Melnik</title><subtitle>Write an awesome description for your new site here. You can edit this line in _config.yml. It will appear in your document head meta (for Google search results) and in your feed.xml site description.</subtitle><entry><title type="html">Adjusting to VIM</title><link href="http://0.0.0.0:4000/dev/2022/05/01/vim.html" rel="alternate" type="text/html" title="Adjusting to VIM" /><published>2022-05-01T00:00:00-07:00</published><updated>2022-05-01T00:00:00-07:00</updated><id>http://0.0.0.0:4000/dev/2022/05/01/vim</id><content type="html" xml:base="http://0.0.0.0:4000/dev/2022/05/01/vim.html"><![CDATA[<p>I use thinkpads. Needless to say the mousepad sucks. And I really don’t want to use another mouse. I like the keyboard and want to stay there.
+<br />
+Learning a new technology, especially one that completely changes your workflow is intimidating. Not to mention hard to do.
+<br />
+But in my journey to become a 10x developer. It is a journey I must take.
+<br />
+Not only will it allow me to work without relying on my mouse to switch around, but I think it might help me have a better understanding of how my code is structured (and improving the structure).
+<br /></p>]]></content><author><name></name></author><category term="dev" /><summary type="html"><![CDATA[I use thinkpads. Needless to say the mousepad sucks. And I really don’t want to use another mouse. I like the keyboard and want to stay there. Learning a new technology, especially one that completely changes your workflow is intimidating. Not to mention hard to do. But in my journey to become a 10x developer. It is a journey I must take. Not only will it allow me to work without relying on my mouse to switch around, but I think it might help me have a better understanding of how my code is structured (and improving the structure).]]></summary></entry><entry><title type="html">How I will integrate teams</title><link href="http://0.0.0.0:4000/dev/2022/05/01/teams.html" rel="alternate" type="text/html" title="How I will integrate teams" /><published>2022-05-01T00:00:00-07:00</published><updated>2022-05-01T00:00:00-07:00</updated><id>http://0.0.0.0:4000/dev/2022/05/01/teams</id><content type="html" xml:base="http://0.0.0.0:4000/dev/2022/05/01/teams.html"><![CDATA[<p><br />
+It’s 6:30 am. I managed to get up early, something I have been too exhaused for a while to do.
+<br /></p>
+
+<p>Lets get started.
+<br /></p>
+
+<p>This is a continuation of my series working on my Uptime Monitoring software “IsItAll.Online”. Today I will be creating the routes to manage and create teams as well as explaining the schema that I will be using.
+<br /></p>
+
+<p>Something that is very essential to do when developing (hardware and software). Is to keep the future in mind, you have to make a product that can last and might even solve issues before they arise.</p>
+
+<p><br /></p>
+
+<p>This does not happen all at once, and usually you will optimize as you go. So sometimes I change my mind of how I will approach things through the article.
+<br /></p>
+
+<p>For each team I initially wanted to have the following attributes:</p>
+
+<ul class="list-disc">
+    <li>ID</li>
+    <li>Name</li>
+    <li>Members</li>
+    <li>External Collaborators</li>
+    <li>History</li>
+
+
+
+</ul>
+<p><br />
+<br /></p>
+
+<p><a class="text-2xl">The problems I solved before they arose.
+</a></p>
+<ul class="list-decimal">
+    <li>Giving the option for the creator to be on or outside the team</li>
+
+    <li>People who create the teams might be external, and only need to create and update the teams permissions. But not be on the actual team themselves</li>
+    <li>Just because someone wants to share something with the team, does not mean that they have to be on the team. This also will fall under external collaborators.</li>
+    <li>Having only registered collaborators for team eliminates invite spam. Where someone can give a team permission to infinite entities, spamming them and not allowing them to work</li>
+    <li>By logging the history, we can see who did what easily and identify issues quickly.</li>
+
+
+
+</ul>
+
+<p><br /></p>
+
+<p>To further improve the backend and database I have decided to keep all members in one attribute, and instead categorize inside each member item as the respective type. This is to save space, reduce complexity, and allow expandablility in the future to different user types. Now if I want to add a new user type I just need to add that as an authorized one in the Validators, and it will all work. Instead of needing to add a new attribute to ever existing team.</p>
+
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+
+<p>Team:
+    - Team members
+    - Outside collaborators</p>]]></content><author><name></name></author><category term="dev" /><summary type="html"><![CDATA[It’s 6:30 am. I managed to get up early, something I have been too exhaused for a while to do.]]></summary></entry><entry><title type="html">I got another Thinkpad</title><link href="http://0.0.0.0:4000/dev/2022/05/01/t420.html" rel="alternate" type="text/html" title="I got another Thinkpad" /><published>2022-05-01T00:00:00-07:00</published><updated>2022-05-01T00:00:00-07:00</updated><id>http://0.0.0.0:4000/dev/2022/05/01/t420</id><content type="html" xml:base="http://0.0.0.0:4000/dev/2022/05/01/t420.html"><![CDATA[<p>I have written mutliple post on multiple platforms talking about how amazing Thinkpads are. And how I completely ditched all other computers I was using, even brand new macs. For an 11 year old laptop. 
+<br />
+<br /></p>
+
+<p>In June of 2021 I purchased my first thinkpad, it was an X220. And honestly I did not know about the other models. But I knew that this one fit my needs.
+<br />
+<br /></p>
+
+<p>Not too sure what I was expecting, maybe a machine to play around with. Obviously I instantly put in an SSD. And then some RAM.
+<br />
+<br /></p>
+
+<p>Let me say, the jump from 4 -&gt; 8gb of ram is incredibibly noticable. And I highly reccomend maxing it out if you can.
+<br />
+<br /></p>
+
+<p>Soon I started using the X220 for all my devlopment instead of my M1 Mac. And then entirly phased out the Mac from my life. 
+<br />
+<br /></p>
+
+<p>Funny enough, I remember thinking I would use the Thinkpad in the subway, because its cheap and not a risk if it breaks or gets stolen.
+<br />
+<br /></p>
+
+<p>I ended up treasuing the Thinkpad more, and would take the M1 Mac with me everywhere.
+<br />
+<br /></p>
+
+<p>Next I got myself a X220T. The tablet version of the X220. Which in my opinion had a nicer screen, and I just started using it more.
+<br />
+<br /></p>
+
+<p>Recently I have been craving some extra screen space. But don’t want to give up everything else great about the laptop.
+<br />
+<br /></p>
+
+<p>My next upgrade is the T420s, which is basically an identical computer. Just 14 inches, and all the ports are on the back.
+<br />
+<br /></p>
+
+<p>I am super excited to get this and write about how it compares to my other experiences. 
+<br />
+<br /></p>
+
+<p>Now I did find it for super cheap (70 dollars). I am optimistic about the condition that it will be in. And if the condition is good, the same seller on ebay has similar systems for 50$. Which I will definitily get, as these laptops last forever and I do not want to use anything other than them.</p>]]></content><author><name></name></author><category term="dev" /><summary type="html"><![CDATA[I have written mutliple post on multiple platforms talking about how amazing Thinkpads are. And how I completely ditched all other computers I was using, even brand new macs. For an 11 year old laptop.]]></summary></entry><entry><title type="html">Waking up early to be happier</title><link href="http://0.0.0.0:4000/personal/2022/05/01/waking-up.html" rel="alternate" type="text/html" title="Waking up early to be happier" /><published>2022-05-01T00:00:00-07:00</published><updated>2022-05-01T00:00:00-07:00</updated><id>http://0.0.0.0:4000/personal/2022/05/01/waking-up</id><content type="html" xml:base="http://0.0.0.0:4000/personal/2022/05/01/waking-up.html"><![CDATA[<p>My productivity, or relative productivity is a big and very important part of how I feel.
+<br /></p>
+
+<p>This is not because I put a lot of pressure on myself, or I have an unhealthy need to be constantly productive.
+<br /></p>
+
+<p>Instead, working and accomplishing my goals makes me happy. So I seek to set out goals for each day.
+<br />
+They range from simple things like doing to laundry, to more complex things such as a large amount of software development.
+<br />
+There are two things I need to watch out for.</p>
+
+<p><br /></p>
+
+<ul class="list-decimal">
+        <li>Burning out (too much work)</li>
+        <li>Exhaustion (too tired to work)</li>
+    </ul>
+
+<p><br /></p>
+
+<p>If I work too much and push too far, then I burn out. Burn out then leads to exhaustion (either from staying up late to catch up on work, or just being sleepy). Then when I am exhausted I cannot wake up on time the next morning and have the energy to get my my work done.</p>
+
+<p><br /></p>
+
+<div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">"</span><span class="s2">Hello</span><span class="dl">"</span><span class="p">)</span>
+
+</code></pre></div></div>
+<p><a class="text-2xl">Progress</a></p>
+
+<ul class="list-desc">
+        <li>05/01/22 @ 6:20 am - It was really hard to initially get out of bed, but once I made it then I had no issue. I do need to figure out and get some snacks for the morning, as while working I get the munchies.</li>
+
+
+</ul>]]></content><author><name></name></author><category term="personal" /><summary type="html"><![CDATA[My productivity, or relative productivity is a big and very important part of how I feel.]]></summary></entry><entry><title type="html">RSA Encryption in 1989?</title><link href="http://0.0.0.0:4000/vintage/dev/2022/04/28/rsa-in-1989.html" rel="alternate" type="text/html" title="RSA Encryption in 1989?" /><published>2022-04-28T00:00:00-07:00</published><updated>2022-04-28T00:00:00-07:00</updated><id>http://0.0.0.0:4000/vintage/dev/2022/04/28/rsa-in-1989</id><content type="html" xml:base="http://0.0.0.0:4000/vintage/dev/2022/04/28/rsa-in-1989.html"><![CDATA[<p><br /></p>
+
+<p><a class="text-xl">Introduction </a>
+<br />
+<br /></p>
+
+<p>A little while back, I purchased some old tech from someone I found on Facebook Marketplace. Surprisingly a great place to find old computers and decent deals.</p>
+
+<p>I don’t know why, maybe because I was overpaying. Or just because he was a really cool guy (which he was). But he gave me 3 boxes worth of software and documentation, for free.</p>
+
+<p>I stayed up till three in the morning organizing everything.</p>
+
+<p>But something in this pile caught my eye. A grey box with</p>
+
+<p><a class="hover:underline">“RSA Data Security, INC”.</a>
+written on it.</p>
+
+<p><br />Turns out, this is the company that acutally created RSA encryption. And I had no idea it was around for so long, let alone that I would come to possess an original UNOPENED boxed copy.</p>
+
+<p><br /> Before I get into how RSA works. Let me talk about the history leading up to it</p>
+
+<p><br />
+<a class="text-xl">The origin story </a>
+<br /></p>
+
+<p>First we allegedly start in 1976 with the introduction of the Asymmetric public-private key. To sum up what that is: You have a private key, everyone else has YOUR public key. If someone wants to send you something that only you can read, they encrypt it with the Public key. And it can only be decrypted with your private key, which is what you have.</p>
+
+<p><br />
+<br /></p>
+
+<p>Ron Rivest, Adi Shamir, and Leonard Adleman set out to tackle the issue of creating a one-way function that was hard to invert. On Passover of 1977, after a celebration at a students house. Ron Rivest couldnt sleep, and formulized the idea that became RSA R(Rivest)S(Shamir)A(Adleman).</p>
+
+<p>The idea of an asymmetric public-private key cryptosystem</p>
+
+<p>https://people.csail.mit.edu/rivest/pubs/ARS03.rivest-slides.pdf</p>
+
+<p>RSA has 4 main steps</p>
+
+<ul class="list-decimal">
+	<li class="indent-8">
+	<a>Key Generation</a>
+	</li>
+	<li class="indent-8">
+	<a>Key Distribution</a>
+	</li>
+	<li class="indent-8">
+	<a>Encryption</a>
+	</li>
+	<li class="indent-8">
+	<a>Decryption</a>
+	</li>
+</ul>
+
+<p>https://en.wikipedia.org/wiki/RSA_(cryptosystem)</p>
+
+<p><br />
+<a class="text-xl">Using the program</a>
+<br /></p>
+
+<p>https://en.wikipedia.org/wiki/RSA_Security</p>]]></content><author><name></name></author><category term="vintage" /><category term="dev" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">Poor usablility?</title><link href="http://0.0.0.0:4000/dev/2022/04/28/poor-usablility.html" rel="alternate" type="text/html" title="Poor usablility?" /><published>2022-04-28T00:00:00-07:00</published><updated>2022-04-28T00:00:00-07:00</updated><id>http://0.0.0.0:4000/dev/2022/04/28/poor-usablility</id><content type="html" xml:base="http://0.0.0.0:4000/dev/2022/04/28/poor-usablility.html"><![CDATA[<p><br />
+Thats a super good question. I am currently in that state.</p>
+
+<p>I worked so hard that I finished everything I needed to get done for the next two weeks.</p>
+
+<p>Sure, I could do more stuff past that. But that sounds like work I should not do since I already did so much.</p>
+
+<p>Now I actually just solved the issue. Because I have so many “projects” and things to do. I just chose one and started working. Normally this is hard to do. But I have different working environments for different types of work. One computer for school and education related work (Macbook), and then my 70$ think-pad for coding in a separate room.</p>
+
+<p>No matter how much you do, there will always be more to tick off your to do list. There is ALWAYS something. This can lead you to feeling like you are accomplishing nothing since there is always more to do.</p>
+
+<p>One way I try to combat this is by writing down all the accomplishments I have each day. It could range from doing laundry and eating properly to building the platform I have been dreaming of for months.</p>
+
+<p>Also, sometimes a break is needed. If you can no longer work with your brain. Do something that involves more physical requirements. Or just relax.</p>]]></content><author><name></name></author><category term="dev" /><summary type="html"><![CDATA[Thats a super good question. I am currently in that state.]]></summary></entry><entry><title type="html">How do I handle Permission Propogation</title><link href="http://0.0.0.0:4000/dev/2022/04/28/permission-propogation.html" rel="alternate" type="text/html" title="How do I handle Permission Propogation" /><published>2022-04-28T00:00:00-07:00</published><updated>2022-04-28T00:00:00-07:00</updated><id>http://0.0.0.0:4000/dev/2022/04/28/permission-propogation</id><content type="html" xml:base="http://0.0.0.0:4000/dev/2022/04/28/permission-propogation.html"><![CDATA[<p><br /></p>
+
+<p class="text-3xl"> How to handle permissions for entities that can be recursively owned by each other.</p>
+<p><br /></p>
+
+<p>I started working on a personal project called <a href="https://isitall.online">isitall.online</a>
+<br /></p>
+
+<p>To sum it up, it is an uptime monitoring software. You have anything (I call an “entity”). And it tells you its status, is it up, its it down. The entity, is simply a represenation, and it can represent anything. A website, a person, a building, a program, heck even a stock.
+<br />
+<br /></p>
+
+<p>IsItAll.Online knows the status of each entity via two methods.</p>
+
+<ul class="list-decimal indent-8">
+
+    <li>If the Entity represents a website or an API, IIAO can just check if its online. This is when IIAO reaches out</li>
+    <li>The other method, is the item that the entity reprents reaches out and indicates its status. This will be the main one used, since it allows for anything to communicate with IsItAll.Online</li>
+
+</ul>
+
+<p><br /></p>
+
+<p>As I was planning the software, I came upon a relization. How will I organize things? I don’t want to do it via tags. But instead maybe a folder like structure?</p>
+
+<p><br /></p>
+
+<p>This is essential for me. And let me explain why.</p>
+
+<hr />
+<p><img src="/assets/permprog/1.png" width="200px" height="auto" /></p>
+
+<p><br />
+I can see the status of this entity, which represents a company. However then I want to go deeper. I would like to see an entity for each of the sub-parts. Which would be</p>
+
+<p><img src="/assets/permprog/2.png" width="400px" height="auto" /></p>
+
+<p><br /></p>
+
+<p>But even that is not enough detail to solve a potential outage. We need more</p>
+
+<p><br /></p>
+
+<p><img src="/assets/permprog/3.png" width="400px" height="auto" /></p>
+
+<p><br /></p>
+
+<p>This can go on forever. But how do we actually organize this in the database?</p>
+
+<p><br /></p>
+
+<p>As far as I am aware, there is no magic program that does this for you.
+We have to link each entity ourselves. And there are many methods to do so
+<br /></p>
+
+<p>Keep in min</p>
+
+<p><br />
+Lets start with what an entity looks like in the database
+<img src="/assets/permprog/4.png" width="300px" height="auto" /></p>
+
+<div class="border-2 curved bg-blue-300">
+Permissions propagation is the process whereby permissions from a higher level node in a folder tree are copied to a child node further down in that same folder tree.
+</div>
+<p>Since we can see that an entity can have children. And those children can have children. We need to devise a method of “permission propogation”</p>
+
+<p><a class="text-3xl">One option is to store a full list. Like a directory list in each entity</a>
+<br />
+<br /></p>
+
+<p>Since “Evaluable” is the first entity (no entity “owns” it). It will have a list value of “/”</p>
+<div class="columns-2 border-dashed border-2 border-blue-300">
+<img src="/assets/permprog/1.png" width="200px" height="auto" />
+
+<img src="/assets/permprog/6.png" width="200px" height="auto" />
+
+</div>
+<p><br />
+Moving down another level, the entities “Backend” and “Frontend” are children of “Evaluable. So their “List” is “/21xe1” (21xe1 is the ID of Evaluable)</p>
+
+<div class="columns-2 border-dashed border-2 border-blue-300">
+<img src="/assets/permprog/2.png" width="400px" height="auto" />
+
+<img src="/assets/permprog/7.png" width="400px" height="auto" />
+
+</div>
+<p><br /></p>
+
+<p>Now we just continue the format.
+<br /></p>
+<div class="columns-2 border-dashed border-2 border-blue-300">
+<img src="/assets/permprog/3.png" width="400px" height="auto" />
+
+<img src="/assets/permprog/5.png" width="400px" height="auto" />
+</div>
+<p><br />
+<br />
+<br />
+<br />
+<br />
+<br /></p>
+
+<p>I don’t know the proper terms for these but I was unable to find a solution.</p>
+
+<p>All I could find was</p>
+
+<p>“You will query 1000x more asking if someone has permission over something rather than changing permission”</p>
+
+<p>So optimize for changing permission instead of</p>
+
+<ol>
+  <li>Search backwards.</li>
+</ol>
+
+<p>If someone comes up to you and says you are their 10th generation decendent. How do you trust them?</p>
+
+<p>And this is also in a situation where people only know who their parents are.</p>
+
+<p>Well one option would be to ask your parents who their parents are, then ask your parents parents who their parents are.</p>
+
+<p>And keep going until you find IF YOU EVEN DO the person who came up to you.</p>
+
+<p>The problem with this is that as generation increases, to find if you are related (or in our case have permission) will exponentally grow.</p>
+
+<p>This option in my opinion requires the most power. But utilizes the least storage</p>
+
+<ol>
+  <li></li>
+</ol>
+
+<p>Store all that came before.</p>
+
+<p>In this case. An entity will store every entity that came before it. And if a user “Owns” or has permission over any one of those entities. Then they may have permission for this one.</p>
+
+<p>This gives us very limited options in terms of managing</p>
+
+<ol>
+  <li>Lookup table
+    <ul>
+      <li>Everything is stored only once.</li>
+      <li>Can allocate permisssions better.</li>
+      <li>Can remove permissions better</li>
+      <li>Specific to users. NOT entities</li>
+    </ul>
+  </li>
+</ol>
+
+<p>still a problem because we have to generate the path of the entity that we are checking against</p>
+
+<p>Has teams and users. First check if a user belongs</p>
+
+<ol>
+  <li>The good method.</li>
+</ol>
+
+<ul>
+  <li>
+    <p>Establish teams. Users can belong to teams</p>
+  </li>
+  <li>Teams have members. But there are two types of members
+    <ul>
+      <li>One of which is part of the team</li>
+      <li>The other is ABOVE. Aka creator</li>
+    </ul>
+  </li>
+  <li>
+    <p>Start with one user who creates one entity. They can choose to add a team to have permission for that.</p>
+
+    <ol>
+      <li>Establish role-based access control, so your Finance team has one group and the same set of permissions they need for their job.</li>
+      <li>Empower data owners to consistently manage their group members and folder permissions.</li>
+      <li>Enable natural inheritance from role-based, least privileged folders. For example, set up a Finance folder, grant the Finance group access, and allow inheritance to sub-folders in the Finance tree. This way, the Finance team can organize their data into different folders, and the data owners manage the permissions. The Finance data stays in the purview of the Finance team, which limits exposure to data theft from insiders and outside attackers.</li>
+      <li>Disable inheritance from the root node of the drive to protect the role-based folders. Aka, only if entity is owend by another entity does it inherit its permissions</li>
+    </ol>
+  </li>
+</ul>]]></content><author><name></name></author><category term="dev" /><summary type="html"><![CDATA[]]></summary></entry><entry><title type="html">My dive into Commodore</title><link href="http://0.0.0.0:4000/vintage/2022/04/23/Com.html" rel="alternate" type="text/html" title="My dive into Commodore" /><published>2022-04-23T15:11:56-07:00</published><updated>2022-04-23T15:11:56-07:00</updated><id>http://0.0.0.0:4000/vintage/2022/04/23/Com</id><content type="html" xml:base="http://0.0.0.0:4000/vintage/2022/04/23/Com.html"><![CDATA[<p><br /></p>
+
+<p>My first venture into Vintage computers was primarily revolved around IBM machines. Since it was the first one I bought, I kind of anchored to it. Nothing else seemed to interest me at the time.</p>
+
+<p>Then all of a sudden, on Hacker News. There was this article about the team behind MOS, and how they developed the Commodore 64 as well as the VIC-20 before it.</p>
+
+<p>I was absolutely hooked because of the open nature of it. These systems could be tinkered with, like with the KIM.</p>
+
+<p>My research continued by watching a documentary about Jack Tramel. Which was interesting, but I wanted to hear more from the engineers.</p>
+
+<p>Based on the videos I was watching, I saw that people could get their hands on some commodores for 20 bucks or less. But as soon as I hit the online market, prices STARTED at 100$. And those were non-working models.</p>]]></content><author><name></name></author><category term="vintage" /><category term="Commodore" /><category term="BASIC" /><category term="MOS" /><summary type="html"><![CDATA[My first venture into Vintage computers was primarily revolved around IBM machines. Since it was the first one I bought, I kind of anchored to it. Nothing else seemed to interest me at the time. Then all of a sudden, on Hacker News. There was this article about the team behind MOS, and how they developed the Commodore 64 as well as the VIC-20 before it. I was absolutely hooked because of the open nature of it. These systems could be tinkered with, like with the KIM. My research continued by watching a documentary about Jack Tramel. Which was interesting, but I wanted to hear more from the engineers. Based on the videos I was watching, I saw that people could get their hands on some commodores for 20 bucks or less. But as soon as I hit the online market, prices STARTED at 100$. And those were non-working models.]]></summary></entry><entry><title type="html">Did I fix the burnout?</title><link href="http://0.0.0.0:4000/personal/2022/04/12/I-escaped-the-burnout.html" rel="alternate" type="text/html" title="Did I fix the burnout?" /><published>2022-04-12T00:00:00-07:00</published><updated>2022-04-12T00:00:00-07:00</updated><id>http://0.0.0.0:4000/personal/2022/04/12/I-escaped-the-burnout</id><content type="html" xml:base="http://0.0.0.0:4000/personal/2022/04/12/I-escaped-the-burnout.html"><![CDATA[<p><br /></p>
+
+<p>This is the morning after. I still feel a little off, but in general I feel amazing.</p>
+
+<p>Yea It sucks because I need to run right now to school and don’t finish classes till 7pm (still have to head home on the shitty MTA).</p>
+
+<p>However, I feel rejuvinated.</p>
+
+<p>Yesterday I took the time to evaluate my prorities, as well as clean up. Like a lot.</p>
+
+<p>Usually my physical space is a reflection of my mental state, and wow it was cluttered.</p>
+
+<p>So I cleaned all that up, and will continue cleaning today once I return.</p>
+
+<p>Also I ordered some post it notes. Because I had the idea to write down my accomplishmenets each day on them. And then stick them up on the wall.</p>
+
+<p>I am really excited to start working again.</p>
+
+<p>Off to school now -»&gt;</p>]]></content><author><name></name></author><category term="personal" /><summary type="html"><![CDATA[This is the morning after. I still feel a little off, but in general I feel amazing. Yea It sucks because I need to run right now to school and don’t finish classes till 7pm (still have to head home on the shitty MTA). However, I feel rejuvinated. Yesterday I took the time to evaluate my prorities, as well as clean up. Like a lot. Usually my physical space is a reflection of my mental state, and wow it was cluttered. So I cleaned all that up, and will continue cleaning today once I return. Also I ordered some post it notes. Because I had the idea to write down my accomplishmenets each day on them. And then stick them up on the wall. I am really excited to start working again. Off to school now -»&gt;]]></summary></entry><entry><title type="html">The Shooting - NYC</title><link href="http://0.0.0.0:4000/personal/2022/04/12/attack.html" rel="alternate" type="text/html" title="The Shooting - NYC" /><published>2022-04-12T00:00:00-07:00</published><updated>2022-04-12T00:00:00-07:00</updated><id>http://0.0.0.0:4000/personal/2022/04/12/attack</id><content type="html" xml:base="http://0.0.0.0:4000/personal/2022/04/12/attack.html"><![CDATA[<p><br /></p>
+
+<p>So my girlfriend and I slept in a bit. Then we rushed out to make it to classes on time.</p>
+
+<p>The train wasn’t arriving, and I check and there were delays on basically every line heading to Manhattan (from Brooklyn).</p>
+
+<p>I took a screenshot and sent it to my professor “Hello professor, there are massive delays so I will be late for class”. He responded with,</p>
+<blockquote>
+  <p>Oh, the shooting is affecting you too?</p>
+</blockquote>
+
+<p>Then not a second after I got texts from friends checking in to make sure I was ok. What the fuck happened??</p>
+
+<p>Checking the news I saw the horror. It’s like my biggest fear, and this might push me over the edge of not taking the MTA.</p>
+
+<p>There is still limited news going around right now, but the perpetrator has not been found.</p>
+
+<p>I messaged the rest of my friends, still waiting to hear back from some of them.</p>
+
+<p>Even though this feels much less that it should, considering I hear news of shooting almost every day. But its starting to get to me more.</p>
+
+<p>How much are we putting ourselves at risk every day? And is it worth it?</p>]]></content><author><name></name></author><category term="personal" /><summary type="html"><![CDATA[So my girlfriend and I slept in a bit. Then we rushed out to make it to classes on time. The train wasn’t arriving, and I check and there were delays on basically every line heading to Manhattan (from Brooklyn). I took a screenshot and sent it to my professor “Hello professor, there are massive delays so I will be late for class”. He responded with, Oh, the shooting is affecting you too? Then not a second after I got texts from friends checking in to make sure I was ok. What the fuck happened?? Checking the news I saw the horror. It’s like my biggest fear, and this might push me over the edge of not taking the MTA. There is still limited news going around right now, but the perpetrator has not been found. I messaged the rest of my friends, still waiting to hear back from some of them. Even though this feels much less that it should, considering I hear news of shooting almost every day. But its starting to get to me more. How much are we putting ourselves at risk every day? And is it worth it?]]></summary></entry></feed>

