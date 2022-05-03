@@ -11,7 +11,7 @@ title: Vintage
         {% if post.categories.first == "vintage"  %}
           
 
-          <a href="/blog/{{ post.url }}" class="hover:underline">
+          <a href="/{{ post.url }}" class="hover:underline">
             {% increment my_counter %}0 {{ post.title }}
           </a>
         
