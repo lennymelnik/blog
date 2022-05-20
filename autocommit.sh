@@ -1,3 +1,3 @@
-sudo git add *
-sudo git commit -m 'autocommit'
-sudo git push
+git add *
+git commit -m 'autocommit'
+git push
