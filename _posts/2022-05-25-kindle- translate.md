@@ -1,22 +1,26 @@
 ---
-title : "I joined a Cybersecurity lab!!!"
-layout : personal
-categories : personal
+title : "Pi-kindle sync"
+layout : dev
+categories : dev
 ---
 <br/>
-  
-I am so happy. The director of a cybersecurity/psychology lab got back to me today and invited me to join!!
-Even though I think it is not a paid thing, I am so happy to be a part of it and finally contribute.
 
-<br/>
+Just to start, I love Kindles. I have one myself, and reccomend them to a lot of people.
 
-I was honestly starting to worry that I would never be given the opportunity to apply myself.
+Loading books and documents is super easy. For me, not for my grandfather. Who also has a kindle.
 
-I have been doing research and going over all the resources to see what sort of research I will be conducting. And it is exactly what I wanted to be doing!
+Regardless of the fact that he is generally very competent at using technology. When it comes to the different type of kindle book formats. He is hopeless.
 
-Although, most of the data collection seems to be manually done. I think I should be able to find a good way to automate it. I just need to figure out exactly what I will be automating and how.
-For example I could make a bot that gets all the relevant news for me, and then displays it for me to go to. And something that catalogs everything I have already gone over?
+I tried teaching him how to use the software to convert certain files to mobi using calibre, but it sometimes gets too complicated.
 
-<br />
+Instead I decided I would simply use a Rasberry Pi. That he would plug the kindle into, it would then scan the kindle filesystem for any non-mobi files, and convert them automaticaly using the calibre.
 
-I do wish to write about my approaches to the research. But for now I need to plan things out!
+Now I could do this via a simple script. But I don't want it to rely on his computer or any action.
+
+Here are the requirements
+
+- No buttons
+
+- Autodetect when kindle has been attached
+
+- Maybe somekind of progress indicator??
